@@ -45,6 +45,10 @@ const PetSchema = new Schema({
         type: Boolean,
         default: false
     },
+    createdOn: {
+        type: Date,
+        default: Date.now()
+    },
     user: {
         type: Schema.Types.ObjectId,
         ref: 'User'

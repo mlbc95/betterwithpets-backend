@@ -98,4 +98,22 @@ router.get('/', (req, res, next) => {
     });
 });
 
+router.get('/getEventsByUser/:id', (req, res, next) => {
+    Event.getEventsByUser(req.params.id, (err, events) => {
+        if(err) {
+            return res.json({
+                success: false,
+                message: 'Error fetching events by User',
+                error: err
+            });
+        }
+
+        res.json({
+            success: true,
+            message: 'Events by User fetched',
+            events: events
+        });
+    });
+})
+
 module.exports = router;

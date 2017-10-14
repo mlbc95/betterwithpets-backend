@@ -38,6 +38,10 @@ const VendorSchema = new Schema({
         },
         phone: String
     },
+    createdAt: {
+        type: Date,
+        default: Date.now()
+    },
     events: [{
         type: Schema.Types.ObjectId,
         ref: 'Event'
