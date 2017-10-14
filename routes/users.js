@@ -19,7 +19,7 @@ router.post('/register', (req, res, next) => {
     });
 
     User.registerUser(newUser, (err, user) => {
-        if(err) {
+        if (err) {
             res.json({
                 success: false,
                 message: 'Failed to register user',
@@ -38,7 +38,7 @@ router.post('/register', (req, res, next) => {
 //Get User By Id
 router.get('/:id', (req, res, next) => {
     User.getUserById(req.params.id, (err, result) => {
-        if(err) {
+        if (err) {
             res.json({
                 success: false,
                 message: 'Error fetching User',
@@ -62,7 +62,7 @@ router.post('/login', (req, res, next) => {
     const password = req.body.credentials.password;
 
     User.getUserByEmail(email, (err, user) => {
-        if(err) {
+        if (err) {
             return res.json({
                 success: false,
                 message: 'Error fetching User with email',
@@ -70,7 +70,7 @@ router.post('/login', (req, res, next) => {
             });
         }
 
-        if(!user) {
+        if (!user) {
             return res.json({
                 success: false,
                 message: 'Email does not exist'
@@ -78,7 +78,7 @@ router.post('/login', (req, res, next) => {
         }
 
         User.comparePassword(password, user.password, (err, isMatched) => {
-            if(err) {
+            if (err) {
                 return res.json({
                     success: false,
                     message: 'Error comparing password',
@@ -86,14 +86,16 @@ router.post('/login', (req, res, next) => {
                 });
             }
 
-            if(isMatched) {
-                const token = jwt.sign({user: user}, config.secretKEY, {
+            if (isMatched) {
+                const token = jwt.sign({
+                    user: user
+                }, config.secretKEY, {
                     expiresIn: 3600
                 });
 
                 res.json({
                     success: true,
-                    token: 'JWT '+token,
+                    token: 'JWT ' + token,
                     message: 'Logged In Successfully',
                     user: {
                         _id: user._id,
@@ -113,6 +115,26 @@ router.post('/login', (req, res, next) => {
 });
 
 //Add Profile
+router.post('/addProfile/:id', (req, res, next) => {
+    let newUserProfile = new User({
+        contact: req.body.contact
+    })
 
+    User.addUserProfile(req.params.id, newUserProfile, (err, user) => {
+        if (err) {
+            return res.json({
+                success: false,
+                message: 'Error adding User profile',
+                error: err
+            });
+        }
+
+        res.json({
+            success: true,
+            message: 'Added profile',
+            user: user
+        });
+    });
+});
 
 module.exports = router;

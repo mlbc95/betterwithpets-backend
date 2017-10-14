@@ -35,7 +35,9 @@ app.use(cors());
 //BodyParser Middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
-    extended: false
+    extended: true,
+    limit: "10mb",
+    parameterLimit: 10000
 }));
 
 //Passport Middleware

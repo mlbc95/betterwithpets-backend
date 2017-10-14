@@ -104,7 +104,7 @@ module.exports.comparePassword = (candidatePassword, hash, callback) => {
     });
 }
 
-module.exports.addUserrofile = (id, newUserProfile, callback) => {
+module.exports.addUserProfile = (id, newUserProfile, callback) => {
     
         User.findById(id, (err, user) => {
             if(err) {
@@ -115,11 +115,11 @@ module.exports.addUserrofile = (id, newUserProfile, callback) => {
                 });
             }
     
-            user.contact.address.street = newUsr=erProfile.contact.address.street;
-            user.contact.address.street2 = newUsr=erProfile.contact.address.street2;
-            user.contact.address.city = newUsr=erProfile.contact.address.city;
-            user.contact.address.state = newUsr=erProfile.contact.address.state;
-            user.contact.address.zip = newUsr=erProfile.contact.address.zip;
+            user.contact.address.street = newUserProfile.contact.address.street;
+            user.contact.address.street2 = newUserProfile.contact.address.street2;
+            user.contact.address.city = newUserProfile.contact.address.city;
+            user.contact.address.state = newUserProfile.contact.address.state;
+            user.contact.address.zip = newUserProfile.contact.address.zip;
         
             user.contact.phone = newVendorProfile.contact.phone;
         
