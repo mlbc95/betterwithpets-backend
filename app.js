@@ -36,10 +36,9 @@ app.use(express.static(`${__dirname}/build`));
 
 //Port Number
 const port = process.env.PORT || 8080;
-
 //INDEX Route
 app.get('/', (req, res) => {
-    res.render('index');
+    res.send('index');
 });
 
 //All Route re-Route
