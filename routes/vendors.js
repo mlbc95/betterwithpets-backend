@@ -114,4 +114,23 @@ router.post('/login', (req, res, next) => {
     });
 });
 
+//Get Vendors
+router.get('/', (req, res, next) => {
+    Vendor.getAllVendors((err, vendors) => {
+        if(err) {
+            return res.json({
+                success: false,
+                message: 'Error fetching all vendors',
+                error: err
+            });
+        }
+
+        res.json({
+            success: true,
+            message: 'Vendors fetched',
+            vendors: vendors
+        });
+    });
+});
+
 module.exports = router;

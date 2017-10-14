@@ -96,3 +96,7 @@ module.exports.addVendorProfile = (id, newVendorProfile, callback) => {
         vendor.save(callback);
     });
 }
+
+module.exports.getAllVendors = (callback) => {
+    Vendor.find(callback);
+}
