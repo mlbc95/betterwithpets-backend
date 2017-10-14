@@ -25,6 +25,7 @@ const app = express();
 
 //Load Routes
 const users = require('./routes/users');
+const pets = require('./routes/pets');
 
 //CORS Middleware
 app.use(cors());
@@ -48,6 +49,7 @@ const port = process.env.PORT || 8080;
 
 //Set up Routes
 app.use('/users', users);
+app.use('/pets', pets);
 
 //INDEX Route
 app.get('/', (req, res) => {

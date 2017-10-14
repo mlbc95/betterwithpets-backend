@@ -103,3 +103,7 @@ module.exports.comparePassword = (candidatePassword, hash, callback) => {
         callback(null, isMatched);
     });
 }
+
+module.exports.addProfile = (newProfile, callback) => {
+    console.log(newProfile);
+}
