@@ -36,6 +36,9 @@ const PetSchema = new Schema({
         },
         color: {
             type: String
+        },
+        photo: {
+            type: String
         }
     },
     visible: {
@@ -65,6 +68,7 @@ module.exports.addPet = (newPet, callback) => {
     newPet.details.color = newPet.details.color;
     newPet.details.age.number = newPet.details.age.number;
     newPet.details.age.unit = newPet.details.age.unit;
+    newPet.details.photo = newPet.details.photo;
 
     newPet.save(callback);
 }

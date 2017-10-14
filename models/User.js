@@ -104,6 +104,25 @@ module.exports.comparePassword = (candidatePassword, hash, callback) => {
     });
 }
 
-module.exports.addProfile = (newProfile, callback) => {
-    console.log(newProfile);
-}
+module.exports.addUserrofile = (id, newUserProfile, callback) => {
+    
+        User.findById(id, (err, user) => {
+            if(err) {
+                return res.json({
+                    success: false,
+                    message: 'Error fetching User by Id',
+                    error: err
+                });
+            }
+    
+            user.contact.address.street = newUsr=erProfile.contact.address.street;
+            user.contact.address.street2 = newUsr=erProfile.contact.address.street2;
+            user.contact.address.city = newUsr=erProfile.contact.address.city;
+            user.contact.address.state = newUsr=erProfile.contact.address.state;
+            user.contact.address.zip = newUsr=erProfile.contact.address.zip;
+        
+            user.contact.phone = newVendorProfile.contact.phone;
+        
+            user.save(callback);
+        });
+    }

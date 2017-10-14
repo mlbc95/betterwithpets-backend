@@ -18,7 +18,8 @@ router.post('/addpet', passport.authenticate('jwt', {session: false}), (req, res
         if(!user) {
             res.json({
                 success: false,
-                message: 'Not Authenticated'
+                message: 'Not Authenticated',
+                error: 'Token might have been expired'
             });
         }
 
@@ -40,7 +41,7 @@ router.post('/addpet', passport.authenticate('jwt', {session: false}), (req, res
                     error: err
                 });
             }
-
+            
             user.pets.push(pet._id);
             user.save();
             res.json({

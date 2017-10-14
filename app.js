@@ -26,6 +26,8 @@ const app = express();
 //Load Routes
 const users = require('./routes/users');
 const pets = require('./routes/pets');
+const vendors = require('./routes/vendors');
+const events =  require('./routes/events');
 
 //CORS Middleware
 app.use(cors());
@@ -50,6 +52,8 @@ const port = process.env.PORT || 8080;
 //Set up Routes
 app.use('/users', users);
 app.use('/pets', pets);
+app.use('/vendors', vendors);
+app.use('/events', events);
 
 //INDEX Route
 app.get('/', (req, res) => {
