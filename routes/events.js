@@ -52,6 +52,7 @@ router.post('/addEvent', passport.authenticate('jwt', {session: false}), (req, r
                     type: req.body.type,
                     description: req.body.description,
                     duration: req.body.duration,
+                    date: req.body.date,
                     vendor: vendor,
                     pet: pet,
                     user: user
@@ -114,6 +115,24 @@ router.get('/getEventsByUser/:id', (req, res, next) => {
             events: events
         });
     });
-})
+});
+
+router.get('/getParkEvents', (req, res, next) => {
+    Event.getParkEvents((err, events) => {
+        if(err) {
+            return res.json({
+                success: false,
+                message: 'Error fetching park Events',
+                error: err
+            });
+        }
+
+        res.json({
+            success: true,
+            message: 'Park events fetched',
+            events: events
+        });
+    });
+});
 
 module.exports = router;

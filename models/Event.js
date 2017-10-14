@@ -20,6 +20,10 @@ const EventSchema = new Schema({
         amount: Number,
         unit: String
     },
+    createdAt: {
+        type: Date,
+        default: Date.now()
+    },
     vendor: {
         type: Schema.Types.ObjectId,
         ref: 'Vendor'
