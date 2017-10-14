@@ -80,4 +80,22 @@ router.post('/addEvent', passport.authenticate('jwt', {session: false}), (req, r
     });
 });
 
+router.get('/', (req, res, next) => {
+    Event.getAllEvents((err, events) => {
+        if(err) {
+            return res.json({
+                success: false,
+                message: 'Error fetching events',
+                error: err
+            });
+        }
+
+        res.json({
+            success: true,
+            message: 'Events fetched',
+            events: events
+        });
+    });
+});
+
 module.exports = router;
