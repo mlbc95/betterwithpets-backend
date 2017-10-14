@@ -55,7 +55,7 @@ const UserSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Pet'
     }]
-});
+}); 
 
 //Set Email to Lowercase
 function toLower(str) {
