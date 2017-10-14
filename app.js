@@ -33,7 +33,7 @@ const events =  require('./routes/events');
 app.use(cors());
 
 //BodyParser Middleware
-app.use(bodyParser.json());
+app.use(bodyParser.json({limit: '5mb'}));
 app.use(bodyParser.urlencoded({
     extended: true,
     limit: "10mb",
