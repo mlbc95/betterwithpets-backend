@@ -72,6 +72,15 @@ module.exports.getUserById = (id, callback) => {
     User.findById(id, callback);
 }
 
+// module.exports.getAllUsers = (callback) => {
+//     User.find(callback);
+// } //Later
+
+module.exports.getUserByEmail = (email, callback) => {
+    const query = {email: email};
+    User.findOne(query, callback);
+}
+
 module.exports.registerUser = (newUser, callback) => {
     bcrypt.genSalt(10, (err, salt) => {
         bcrypt.hash(newUser.password, salt, (err, hash) => {
