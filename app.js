@@ -3,6 +3,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const config = require('./config/keys');
+const passport = require('passport');
 
 mongoose.Promise = global.Promise
 mongoose.connect(config.mongoURI, {
@@ -22,6 +23,9 @@ mongoose.connect(config.mongoURI, {
 //Set Express App Variable
 const app = express();
 
+//Load Routes
+const users = require('./routes/users');
+
 //CORS Middleware
 app.use(cors());
 
@@ -31,11 +35,20 @@ app.use(bodyParser.urlencoded({
     extended: false
 }));
 
+//Passport Middleware
+app.use(passport.initialize());
+app.use(passport.session());
+require('./config/passport')(passport);
+
 //Set Static folder
 app.use(express.static(`${__dirname}/build`));
 
 //Port Number
 const port = process.env.PORT || 8080;
+
+//Set up Routes
+app.use('/users', users);
+
 //INDEX Route
 app.get('/', (req, res) => {
     res.send('index');
