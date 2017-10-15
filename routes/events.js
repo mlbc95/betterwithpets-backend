@@ -7,14 +7,16 @@ const Pet = require('../models/Pet');
 const User = require('../models/User');
 const Vendor = require('../models/Vendor');
 
-router.post('/addEvent', passport.authenticate('jwt', {session: false}), (req, res, next) => {
+router.post('/addEvent', passport.authenticate('jwt', {
+    session: false
+}), (req, res, next) => {
     console.log(`Body coming in /addEvent`, req.body);
 
     const vendorId = req.body.vendorId;
     const petId = req.body.petId;
 
     User.findById(req.user._id, (err, user) => {
-        if(err) {
+        if (err) {
             return res.json({
                 success: false,
                 message: 'Error fetching User by Id',
@@ -22,7 +24,7 @@ router.post('/addEvent', passport.authenticate('jwt', {session: false}), (req, r
             });
         }
 
-        if(!user) {
+        if (!user) {
             res.json({
                 success: false,
                 message: 'Not Authenticated',
@@ -31,16 +33,16 @@ router.post('/addEvent', passport.authenticate('jwt', {session: false}), (req, r
         }
 
         Vendor.findById(req.body.vendorId, (err, vendor) => {
-            if(err) {
+            if (err) {
                 return res.json({
                     success: false,
                     message: 'Error fetching Vendor by Id',
                     error: err
                 });
             }
-            
+
             Pet.findById(req.body.petId, (err, pet) => {
-                if(err) {
+                if (err) {
                     return res.json({
                         success: false,
                         message: 'Error fetching Pet by Id',
@@ -59,7 +61,7 @@ router.post('/addEvent', passport.authenticate('jwt', {session: false}), (req, r
                 });
 
                 Event.addEvent(newEvent, (err, event) => {
-                    if(err) {
+                    if (err) {
                         return res.json({
                             success: false,
                             message: 'Error adding event',
@@ -71,7 +73,7 @@ router.post('/addEvent', passport.authenticate('jwt', {session: false}), (req, r
                     vendor.save();
 
                     res.json({
-                        success:true,
+                        success: true,
                         message: 'Event added',
                         event: event
                     });
@@ -83,7 +85,25 @@ router.post('/addEvent', passport.authenticate('jwt', {session: false}), (req, r
 
 router.get('/', (req, res, next) => {
     Event.getAllEvents((err, events) => {
-        if(err) {
+        if (err) {
+            return res.json({
+                success: false,
+                message: 'Error fetching events',
+                error: err
+            });
+        }
+
+        res.json({
+            success: true,
+            message: 'Events fetched',
+            events: events
+        });
+    });
+});
+
+router.get('/getEventsByVendor/:id', (req, res, next) => {
+    Event.getEventsByVendor(req.params.id, (err, events) => {
+        if (err) {
             return res.json({
                 success: false,
                 message: 'Error fetching events',
@@ -101,7 +121,7 @@ router.get('/', (req, res, next) => {
 
 router.get('/getEventsByUser/:id', (req, res, next) => {
     Event.getEventsByUser(req.params.id, (err, events) => {
-        if(err) {
+        if (err) {
             return res.json({
                 success: false,
                 message: 'Error fetching events by User',
@@ -119,7 +139,7 @@ router.get('/getEventsByUser/:id', (req, res, next) => {
 
 router.get('/getParkEvents', (req, res, next) => {
     Event.getParkEvents((err, events) => {
-        if(err) {
+        if (err) {
             return res.json({
                 success: false,
                 message: 'Error fetching park Events',
@@ -139,7 +159,7 @@ router.get('/getParkEvents', (req, res, next) => {
 //Get the latest Event
 router.get('/getLatest/:id', (req, res, next) => {
     Event.getLatest(req.params.id, (err, event) => {
-        if(err) {
+        if (err) {
             return res.json({
                 success: false,
                 message: 'Error fetching latest event',
