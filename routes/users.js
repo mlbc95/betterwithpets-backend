@@ -93,6 +93,9 @@ router.post('/login', (req, res, next) => {
                     expiresIn: 3600
                 });
 
+                user.loginCount++;
+                user.save();
+
                 res.json({
                     success: true,
                     token: 'JWT ' + token,
@@ -101,7 +104,8 @@ router.post('/login', (req, res, next) => {
                         _id: user._id,
                         firstName: user.firstName,
                         lastName: user.lastName,
-                        email: user.email
+                        email: user.email,
+                        loginCount: user.loginCount
                     }
                 });
             } else {

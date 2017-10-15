@@ -52,6 +52,10 @@ const UserSchema = new Schema({
         type: Date,
         default: Date.now()
     },
+    loginCount: {
+        type: Number,
+        default: 0
+    },
     stories: [{
         type: String
     }],
