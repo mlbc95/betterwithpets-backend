@@ -81,5 +81,11 @@ module.exports.getEventsByVendor = (id, callback) => {
         .populate('user', '-password -__v -stories')
         .populate('pet', '-__v')
         .populate('vendor', '-__v -password')
+}
+
+module.exports.getLatest = (callback) => {
+    const query = {createdAt: -1};
+    Event.findOne()
+        .sort(query)
         .exec(callback);
 }

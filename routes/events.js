@@ -135,4 +135,25 @@ router.get('/getParkEvents', (req, res, next) => {
     });
 });
 
+
+//Get the latest Event
+router.get('/getLatest', (req, res, next) => {
+    Event.getLatest((err, event) => {
+        if(err) {
+            return res.json({
+                success: false,
+                message: 'Error fetching latest event',
+                error: err
+            });
+        }
+
+        res.json({
+            success: true,
+            message: 'latest Event fetched',
+            event: event
+        });
+    });
+});
+
+
 module.exports = router;
