@@ -84,8 +84,9 @@ module.exports.getEventsByVendor = (id, callback) => {
 }
 
 module.exports.getLatest = (id, callback) => {
-    const query = {user: id, createdAt: -1};
-    Event.findOne()
+    const findQuery = {user: id};
+    const query = {createdAt: -1};
+    Event.findOne(findQuery)
         .sort(query)
         .exec(callback);
 }
