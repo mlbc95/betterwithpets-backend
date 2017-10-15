@@ -137,8 +137,8 @@ router.get('/getParkEvents', (req, res, next) => {
 
 
 //Get the latest Event
-router.get('/getLatest', (req, res, next) => {
-    Event.getLatest((err, event) => {
+router.get('/getLatest/:id', (req, res, next) => {
+    Event.getLatest(req.params.id, (err, event) => {
         if(err) {
             return res.json({
                 success: false,

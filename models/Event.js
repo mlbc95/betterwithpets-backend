@@ -83,8 +83,8 @@ module.exports.getEventsByVendor = (id, callback) => {
         .populate('vendor', '-__v -password')
 }
 
-module.exports.getLatest = (callback) => {
-    const query = {createdAt: -1};
+module.exports.getLatest = (id, callback) => {
+    const query = {user: id, createdAt: -1};
     Event.findOne()
         .sort(query)
         .exec(callback);
