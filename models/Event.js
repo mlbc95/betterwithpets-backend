@@ -81,6 +81,7 @@ module.exports.getEventsByVendor = (id, callback) => {
         .populate('user', '-password -__v -stories')
         .populate('pet', '-__v -photo')
         .populate('vendor', '-__v -password')
+        .exec(callback);
 }
 
 module.exports.getLatest = (id, callback) => {
