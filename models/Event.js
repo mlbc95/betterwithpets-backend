@@ -57,7 +57,7 @@ module.exports.getEventsByUser = (id, callback) => {
     };
     Event.find(query)
         .populate('user', '-password -__v -stories')
-        .populate('pet', '-__v -photo')
+        .populate('pet', '-__v -details.photo')
         .populate('vendor', '-__v')
         .exec(callback);
 }
@@ -68,7 +68,7 @@ module.exports.getParkEvents = (callback) => {
     };
     Event.find(query)
         .populate('user', '-password -__v -stories')
-        .populate('pet', '-__v -photo')
+        .populate('pet', '-__v -details.photo')
         .populate('vendor', '-__v -password')
         .exec(callback);
 }
@@ -79,7 +79,7 @@ module.exports.getEventsByVendor = (id, callback) => {
     };
     Event.find(query)
         .populate('user', '-password -__v -stories')
-        .populate('pet', '-__v -photo')
+        .populate('pet', '-__v -details.photo')
         .populate('vendor', '-__v -password')
         .exec(callback);
 }
